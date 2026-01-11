@@ -28,15 +28,21 @@ Constraints:
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
+        # initialize max_profit to a very small value (acts as negative infinity sentinel)
         max_profit = -float(inf)
+        # min_price stores the lowest price seen so far (best buy candidate)
         min_price = prices[0]
 
+        # iterate through prices starting from day 1 and update min_price and max_profit
         for i in range(1, len(prices)):
             if prices[i] > min_price:
+                # potential profit if we sell today
                 max_profit = max(max_profit, prices[i] - min_price)
             else:
+                # update the minimum buy price
                 min_price = prices[i]
         
+        # return the maximum profit if it is positive, otherwise return 0
         if max_profit > 0:
             return max_profit
         return 0

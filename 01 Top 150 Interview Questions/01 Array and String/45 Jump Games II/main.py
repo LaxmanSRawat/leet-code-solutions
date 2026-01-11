@@ -29,16 +29,20 @@ It's guaranteed that you can reach nums[n - 1].'''
 '''
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        jumps= 0
+        # jumps: number of jumps taken so far
+        jumps = 0
+        # farthest: the farthest index reachable within the current or next jump
         farthest = 0
+        # boundary: the end index of the range covered by the current number of jumps
         boundary = 0
 
-
-        for i in range(len(nums)-1):
+        for i in range(len(nums) - 1):
+            # update farthest reachable index from this position
             farthest = max(farthest, i + nums[i])
 
-            if(i==boundary):
-                jumps+=1
+            # if we've reached the boundary, we must make a jump and extend the boundary
+            if i == boundary:
+                jumps += 1
                 boundary = farthest
         
         return jumps

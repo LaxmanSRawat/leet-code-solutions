@@ -25,17 +25,20 @@ Constraints:
 
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
+        # fuel is the remaining number of steps we can still take
         fuel = nums[0]
-        i=0
-        destination = len(nums)-1
-        while(fuel >0 and i < destination):
-            fuel -=1
-            i+=1
-            
+        i = 0
+        destination = len(nums) - 1
+        # iterate while we have remaining steps and haven't reached the end
+        while fuel > 0 and i < destination:
+            fuel -= 1
+            i += 1
+
             if i == destination:
                 return True
-            
-            fuel = max(fuel,nums[i])
-        
+
+            # refresh fuel with the best jump length available at current index
+            fuel = max(fuel, nums[i])
+
         return i == destination
         
